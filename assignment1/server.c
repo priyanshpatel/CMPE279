@@ -73,7 +73,12 @@ int main(int argc, char const *argv[])
             perror("failed to set id of child process");
             exit(EXIT_FAILURE);
         } else {
-            printf("perform operations here")
+            printf("The user ID is %d\n", getuid());
+            valread = read(new_socket, buffer, 1024);
+            printf("Read %d bytes: %s\n", valread, buffer);
+            send(new_socket, hello, strlen(hello), 0);
+            printf("Hello message sent\n");
+            printf("*** Child process is done ***\n");
         }
     } else {
         while ((pid = wait(&status)) > 0);
